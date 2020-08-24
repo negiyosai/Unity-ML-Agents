@@ -4,20 +4,25 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using System;
+using UnityEngine.UI;
 
 public class Jump : Agent
 {
     public float jumpHeight = 7f;
-    public bool isGrounded;
+    public Text scoreText;
+    bool isGrounded; 
+    Rigidbody rb;
+    Vector3 startingPosition;
+    int score = 0;
 
-    private Rigidbody rb;
 
     public event Action OnReset;
 
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
-
+        startingPosition = transform.position;
+        scoreText.text = "Score: " + score;
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -28,7 +33,7 @@ public class Jump : Agent
 
     public override void OnEpisodeBegin()
     {
-        //Reset
+        Reset();
     }
 
     public override void Heuristic(float[] actionsOut)
@@ -38,6 +43,12 @@ public class Jump : Agent
             actionsOut[0] = 1;
 
 
+    }
+
+    private void FixedUpdate()
+    {
+        if (isGrounded)
+            RequestDecision();
     }
 
     void Update()
@@ -56,12 +67,16 @@ public class Jump : Agent
         }
     }
 
-    void OnCollisionEnter(Collision other)
+    private void Reset()
     {
-        if (other.gameObject.tag == "Ground")
-        {
-            Invoke("BoolChange", 0.1f);
-        }
+        score = 0;
+        isGrounded = true;
+
+        //Reset Movement and Position
+        transform.position = startingPosition;
+        rb.velocity = Vector3.zero;
+
+        OnReset?.Invoke();
     }
 
     void BoolChange()
@@ -69,12 +84,29 @@ public class Jump : Agent
         isGrounded = true;
     }
 
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            Invoke("BoolChange", 0.1f);
+        }
+        
+    }
 
     void OnCollisionExit(Collision other)
     {
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Score")
+        {
+            score++;
+            scoreText.text = "Score: " + score;
         }
     }
 }
