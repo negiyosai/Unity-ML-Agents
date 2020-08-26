@@ -105,8 +105,17 @@ public class Jump : Agent
     {
         if (other.gameObject.tag == "Score")
         {
+            AddReward(increment: 0.1f);
             score++;
             scoreText.text = "Score: " + score;
+        }
+
+        else if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Game Over");
+            AddReward(increment:-1f);
+            EndEpisode();
+
         }
     }
 }
