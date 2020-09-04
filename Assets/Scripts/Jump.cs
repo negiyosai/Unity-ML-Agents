@@ -10,7 +10,7 @@ public class Jump : Agent
 {
     public float jumpHeight = 7f;
     public Text scoreText;
-    bool isGrounded; 
+    public bool isGrounded; 
     Rigidbody rb;
     Vector3 startingPosition;
     int score = 0;
@@ -53,7 +53,8 @@ public class Jump : Agent
 
     void Update()
     {
-        //TriggerJump();
+        if (transform.position.y >= 7)
+            Reset();
     }
 
     void TriggerJump()
@@ -70,7 +71,8 @@ public class Jump : Agent
     private void Reset()
     {
         score = 0;
-        isGrounded = true;
+        scoreText.text = "Score: " + score;
+        isGrounded = false;
 
         //Reset Movement and Position
         transform.position = startingPosition;
@@ -79,23 +81,18 @@ public class Jump : Agent
         OnReset?.Invoke();
     }
 
-    void BoolChange()
-    {
-        isGrounded = true;
-    }
-
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Ground")
         {
-            Invoke("BoolChange", 0.1f);
+            isGrounded = true;
         }
         
     }
 
     void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
+        //if (other.gameObject.tag == "Ground")
         {
             isGrounded = false;
         }
