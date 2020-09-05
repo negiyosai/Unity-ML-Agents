@@ -63,7 +63,9 @@ public class Jump : Agent
         {
             //if (Input.GetKeyDown("space"))
             {
-                rb.AddForce(Vector3.up * jumpHeight * 100);
+                Debug.Log("JUMP");
+                rb.AddForce(new Vector3(0, jumpHeight, 0), ForceMode.VelocityChange);
+                isGrounded = false;
             }
         }
     }
@@ -90,13 +92,13 @@ public class Jump : Agent
         
     }
 
-    void OnCollisionExit(Collision other)
+    /*void OnCollisionExit(Collision other)
     {
         //if (other.gameObject.tag == "Ground")
         {
             isGrounded = false;
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
