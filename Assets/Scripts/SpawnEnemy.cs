@@ -6,12 +6,19 @@ public class SpawnEnemy : MonoBehaviour
 {
     [SerializeField] float spawnInterval;
     [SerializeField] GameObject enemy;
+    bool shouldStart = true;
     private void Start()
     {
-        InvokeRepeating("Spawn", 0, 3);
+        StartCoroutine(StartSpawn());
     }
-    void Spawn()
+
+    IEnumerator StartSpawn()
     {
-        Instantiate(enemy, gameObject.transform.position, Quaternion.identity);
+        while (shouldStart)
+        {
+            Instantiate(enemy, gameObject.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(3, 5));
+        }
     }
+ 
 }

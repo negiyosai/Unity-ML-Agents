@@ -14,6 +14,7 @@ public class Jump : Agent
     Rigidbody rb;
     Vector3 startingPosition;
     int score = 0;
+    int penalty = 0;
 
 
     public event Action OnReset;
@@ -41,8 +42,6 @@ public class Jump : Agent
         actionsOut[0] = 0;
         if (Input.GetKey(KeyCode.Space))
             actionsOut[0] = 1;
-
-
     }
 
     private void FixedUpdate()
@@ -63,6 +62,7 @@ public class Jump : Agent
         {
             //if (Input.GetKeyDown("space"))
             {
+                penalty += 1;
                 Debug.Log("JUMP");
                 rb.AddForce(new Vector3(0, jumpHeight, 0), ForceMode.VelocityChange);
                 isGrounded = false;
@@ -87,7 +87,13 @@ public class Jump : Agent
     {
         if (other.gameObject.tag == "Ground")
         {
+            if (penalty >= 1)
+            {
+               // AddReward(-1f);
+                penalty = 0;
+            }
             isGrounded = true;
+            
         }
         
     }
@@ -104,17 +110,18 @@ public class Jump : Agent
     {
         if (other.gameObject.tag == "Score")
         {
-            AddReward(increment: 0.1f);
+            AddReward(0.1f);
             score++;
             scoreText.text = "Score: " + score;
+            penalty = 0;
         }
 
         else if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("Game Over");
-            AddReward(increment:-1f);
+            AddReward(-1f);
+            penalty = 0;
             EndEpisode();
-
         }
     }
 }
