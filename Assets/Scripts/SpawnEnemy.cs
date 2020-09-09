@@ -19,8 +19,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         while (shouldStart)
         {
-            numberOfObjects++;
-            objectSpawnedText.text = "Objects Spawned: " + numberOfObjects.ToString(); 
+            ManagerScript.instance.SetText();
             Instantiate(enemy, gameObject.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(spawnIntervalStart, spawnIntervalEnd));
         }

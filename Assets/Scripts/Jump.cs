@@ -9,11 +9,9 @@ using UnityEngine.UI;
 public class Jump : Agent
 {
     public float jumpHeight = 7f;
-    public Text scoreText;
     public bool isGrounded; 
     Rigidbody rb;
     Vector3 startingPosition;
-    int score = 0;
     int penalty = 0;
 
 
@@ -23,7 +21,6 @@ public class Jump : Agent
     {
         rb = GetComponent<Rigidbody>();
         startingPosition = transform.position;
-        scoreText.text = "Score: " + score;
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -72,8 +69,8 @@ public class Jump : Agent
 
     private void Reset()
     {
-        score = 0;
-        scoreText.text = "Score: " + score;
+        ManagerScript.instance.score = 0;
+        ManagerScript.instance.scoreText.text = "Score: " + ManagerScript.instance.score;
         isGrounded = false;
 
         //Reset Movement and Position
@@ -111,8 +108,8 @@ public class Jump : Agent
         if (other.gameObject.tag == "Score")
         {
             AddReward(0.1f);
-            score++;
-            scoreText.text = "Score: " + score;
+            ManagerScript.instance.score++;
+            ManagerScript.instance.scoreText.text = "Score: " + ManagerScript.instance.score;
             penalty = 0;
         }
 
