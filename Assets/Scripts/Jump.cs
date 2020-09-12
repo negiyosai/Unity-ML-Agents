@@ -12,7 +12,8 @@ public class Jump : Agent
     public bool isGrounded; 
     Rigidbody rb;
     Vector3 startingPosition;
-    int penalty = 0;
+    public int penalty = 0;
+    public int penaltyAmount = 0;
 
 
     public event Action OnReset;
@@ -86,8 +87,9 @@ public class Jump : Agent
         {
             if (penalty >= 1)
             {
-               // AddReward(-1f);
+                AddReward(-0.2f); //Negative reward for jumping without any reason
                 penalty = 0;
+                penaltyAmount -= 1;
             }
             isGrounded = true;
             
@@ -108,6 +110,7 @@ public class Jump : Agent
         if (other.gameObject.tag == "Score")
         {
             AddReward(0.1f);
+            penaltyAmount += 1;
             ManagerScript.instance.score++;
             ManagerScript.instance.scoreText.text = "Score: " + ManagerScript.instance.score;
             penalty = 0;
@@ -116,7 +119,7 @@ public class Jump : Agent
         else if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("Game Over");
-            AddReward(-1f);
+            AddReward(-0.8f);
             penalty = 0;
             EndEpisode();
         }
