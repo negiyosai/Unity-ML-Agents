@@ -9,14 +9,17 @@ A small project exploring the basic premise of reinforcement learning using Unit
 Create a Virtual Environment and install mlagents. Python is a prerequisite.
 
     cd into an empty folder where you want to create the virtual environment
+    
     ```
     py -m venv ExampleNameEnv
     ```
     To activate Virtual Environment, cd into virtual environment location and
+    
     ```
     .\Scripts\Activate
     ```
     While the virtual environment is activated,
+    
     ```
     pip install mlagents
     ```
