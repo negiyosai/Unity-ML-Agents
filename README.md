@@ -6,7 +6,8 @@ A small project exploring the basic premise of reinforcement learning using Unit
 
 ### Installing ml-agents
 
-1. Create a Virtual Environment:
+Create a Virtual Environment and install mlagents. Python is a prerequisite.
+
     cd into an empty folder where you want to create the virtual environment
     ```
     py -m venv ExampleNameEnv
@@ -15,25 +16,29 @@ A small project exploring the basic premise of reinforcement learning using Unit
     ```
     .\Scripts\Activate
     ```
-
-2. Install ml-agents
     While the virtual environment is activated,
     ```
     pip install mlagents
     ```
 
-3. Training Commands
+### Training 
+    
     cd into yaml location inside the unity project
     ```
     mlagents-learn Jumper.yaml --run-id="JumperTestx"
     ```
     Tensorboard logs
-    ```
-    tensorboard --logdir=summaries
-    ```
+
     Training a build.exe
     ```
     mlagents-learn Jumper.yaml --run-id=JumperTestx --env= ./Build/Unity-ML-Agents.app --time-scale=10 --quality-level=0 --width=512 --height=512
+    ```
+
+### Tensorboard Logs
+
+    cd into location where "results" are stored
+    ```
+    tensorboard --logdir=summaries
     ```
 
 ## Results
