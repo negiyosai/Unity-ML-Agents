@@ -23,20 +23,18 @@ Create a Virtual Environment and install mlagents. Python is a prerequisite.
 
 ### Training 
     
-    cd into yaml location inside the unity project
+1. cd into yaml location inside the unity project
     ```
     mlagents-learn Jumper.yaml --run-id="JumperTestx"
     ```
-    Tensorboard logs
-
-    Training a build.exe
+2. Training a build.exe
     ```
     mlagents-learn Jumper.yaml --run-id=JumperTestx --env= ./Build/Unity-ML-Agents.app --time-scale=10 --quality-level=0 --width=512 --height=512
     ```
 
 ### Tensorboard Logs
 
-    cd into location where "results" are stored
+1. cd into location where "results" are stored
     ```
     tensorboard --logdir=summaries
     ```
