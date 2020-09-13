@@ -53,6 +53,14 @@ Create a Virtual Environment and install mlagents. Python is a prerequisite.
 ### Key
 ![](/Readme_assets/Key.png)
 
+## Test Scenes
+
+### Scene 1
+![](/Readme_assets/1.png)
+
+### Scene 2
+![](/Readme_assets/T2_1.png)
+
 ### Built With
 
 * [Unity 2019.3.13f](https://unity.com/)
