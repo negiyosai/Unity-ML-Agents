@@ -36,7 +36,7 @@ Create a Virtual Environment and install mlagents. Python is a prerequisite.
 
 1. cd into location where "results" are stored
     ```
-    tensorboard --logdir=summaries
+    tensorboard --logdir=results
     ```
 
 ## Results
