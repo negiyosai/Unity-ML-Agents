@@ -7,16 +7,22 @@ using System;
 using UnityEngine.UI;
 
 public class Jump : Agent
-{
+{   
     public float jumpHeight = 7f;
     public bool isGrounded; 
     Rigidbody rb;
     Vector3 startingPosition;
     public int penalty = 0;
     public int penaltyAmount = 0;
-
-
+    public Color hitColor;
+    public Color originalColor;
     public event Action OnReset;
+
+    private void Start()
+    {
+        
+    }
+
 
     public override void Initialize()
     {
@@ -97,14 +103,6 @@ public class Jump : Agent
         
     }
 
-    /*void OnCollisionExit(Collision other)
-    {
-        //if (other.gameObject.tag == "Ground")
-        {
-            isGrounded = false;
-        }
-    }*/
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Score")
@@ -119,9 +117,16 @@ public class Jump : Agent
         else if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("Game Over");
+            gameObject.GetComponent<Renderer>().material.color = hitColor;
+            Invoke("ChangeColor", 1f);
             AddReward(-0.8f);
             penalty = 0;
             EndEpisode();
         }
+    }
+
+    void ChangeColor()
+    {
+        gameObject.GetComponent<Renderer>().material.color = originalColor;
     }
 }
