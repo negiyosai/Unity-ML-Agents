@@ -25,6 +25,8 @@ public class ManagerScript : MonoBehaviour
         scoreText.text = "Score: " + score;
         objectSpawnedText.text = "Objects Spawned: " + objectCounter.ToString();
     }
+
+
     private void Update()
     {
         if (Time.unscaledTime > _timer)

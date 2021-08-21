@@ -1136,7 +1136,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.2
@@ -1374,7 +1374,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 871f18a14e64abb48bb453b240366137,
+        type: 3}
     - target: {fileID: 8687138043085971770, guid: a8dd0e1b95f49fc4285e1f52c567016f,
         type: 3}
       propertyPath: hitColor.g
@@ -1409,6 +1410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: originalColor.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687138043085971770, guid: a8dd0e1b95f49fc4285e1f52c567016f,
+        type: 3}
+      propertyPath: penalty
+      value: 42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8dd0e1b95f49fc4285e1f52c567016f, type: 3}

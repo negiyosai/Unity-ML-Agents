@@ -9,7 +9,7 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] int spawnIntervalEnd;
     [SerializeField] GameObject enemy;
     [SerializeField] Text objectSpawnedText;
-    int numberOfObjects = 0;
+
     bool shouldStart = true;
     private void Start()
     {

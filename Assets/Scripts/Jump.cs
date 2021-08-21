@@ -18,12 +18,7 @@ public class Jump : Agent
     public Color originalColor;
     public event Action OnReset;
 
-    private void Start()
-    {
-        
-    }
-
-
+ 
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
